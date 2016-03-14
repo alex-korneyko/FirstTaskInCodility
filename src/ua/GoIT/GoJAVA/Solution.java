@@ -19,8 +19,8 @@ public class Solution {
                 }
             } else {
                 foundFirstOne = true;
-                curSequence = 0;
                 maxSequence = Math.max(maxSequence, curSequence);
+                curSequence = 0;
             }
             N /= 2;
         }
