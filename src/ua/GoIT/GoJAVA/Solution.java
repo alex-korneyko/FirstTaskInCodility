@@ -1,7 +1,5 @@
 package ua.GoIT.GoJAVA;
 
-import java.util.ArrayList;
-
 public class Solution {
 
     public int solution(int N) {
@@ -9,42 +7,22 @@ public class Solution {
         int maxSequence = 0;
         int curSequence = 0;
 
-        boolean foundFirsOne = false;
-
-        ArrayList<Boolean> bins = new ArrayList<>();
+        boolean foundFirstOne = false;
 
         while (N > 0) {
-            bins.add((N % 2) > 0);
-            N = N / 2;
-        }
-
-        //region Only for output to display
-        for (int i = bins.size() - 1; i >= 0; i--) {
-            System.out.print(i != 0 ? (bins.get(i) ? 1 : 0) : (bins.get(i) ? 1 : 0) + "\n");
-        }
-        //endregion
-
-        for (boolean bit : bins) {
-
-            //Searching for first one from end (in 'bins' sequence is reversed)
-            if (!bit) {
-                if (!foundFirsOne) {
+            if ((N % 2) == 0) {
+                if (!foundFirstOne) {
+                    N /= 2;
                     continue;
+                } else {
+                    curSequence++;
                 }
             } else {
-                foundFirsOne = true;
-            }
-
-
-            if (!bit)
-                curSequence++;
-            else {
+                foundFirstOne = true;
                 curSequence = 0;
+                maxSequence = Math.max(maxSequence, curSequence);
             }
-
-            if (maxSequence < curSequence) {
-                maxSequence = curSequence;
-            }
+            N /= 2;
         }
 
         return maxSequence;
